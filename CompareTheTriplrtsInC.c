@@ -17,42 +17,105 @@ char** split_string(char*);
 int parse_int(char*);
 
 /*
- * Complete the 'simpleArraySum' function below.
+ * Complete the 'compareTriplets' function below.
  *
- * The function is expected to return an INTEGER.
- * The function accepts INTEGER_ARRAY ar as parameter.
+ * The function is expected to return an INTEGER_ARRAY.
+ * The function accepts following parameters:
+ *  1. INTEGER_ARRAY a
+ *  2. INTEGER_ARRAY b
  */
 
-int simpleArraySum(int ar_count, int* ar) {
-    int s = 0;
-while(ar_count > 0) {
-    s += *ar;
-    ar += 1;
-    ar_count--;
+/*
+ * To return the integer array from the function, you should:
+ *     - Store the size of the array to be returned in the result_count variable
+ *     - Allocate the array statically or dynamically
+ *
+ * For example,
+ * int* return_integer_array_using_static_allocation(int* result_count) {
+ *     *result_count = 5;
+ *
+ *     static int a[5] = {1, 2, 3, 4, 5};
+ *
+ *     return a;
+ * }
+ *
+ * int* return_integer_array_using_dynamic_allocation(int* result_count) {
+ *     *result_count = 5;
+ *
+ *     int *a = malloc(5 * sizeof(int));
+ *
+ *     for (int i = 0; i < 5; i++) {
+ *         *(a + i) = i + 1;
+ *     }
+ *
+ *     return a;
+ * }
+ *
+ */
+int* compareTriplets(int a_count, int* a, int b_count, int* b, int* result_count) {
+    *result_count = 2;
+int* ar = malloc( *result_count * sizeof(int) ); 
+int i = 0;
+while(i < *result_count) {
+    *(ar + i) = 0;
+    ++i;
 }
-printf("%d", s);
-return s;
+
+while(a_count > 0) {
+if( *(a + a_count - 1) < *(b + b_count - 1) ) {
+    *(ar + 1) += 1;
+} else if( *(a + a_count - 1) > *(b + b_count - 1) ) {
+    *ar += 1;
 }
+--a_count;
+--b_count;
+}
+
+i = 0;
+while(i < 2) {
+    printf("%d ", *(ar + i));
+    ++i;
+}
+  return ar;  
+}
+
 
 int main()
 {
     FILE* fptr = fopen(getenv("OUTPUT_PATH"), "w");
 
-    int ar_count = parse_int(ltrim(rtrim(readline())));
+    char** a_temp = split_string(rtrim(readline()));
 
-    char** ar_temp = split_string(rtrim(readline()));
+    int* a = malloc(3 * sizeof(int));
 
-    int* ar = malloc(ar_count * sizeof(int));
+    for (int i = 0; i < 3; i++) {
+        int a_item = parse_int(*(a_temp + i));
 
-    for (int i = 0; i < ar_count; i++) {
-        int ar_item = parse_int(*(ar_temp + i));
-
-        *(ar + i) = ar_item;
+        *(a + i) = a_item;
     }
 
-    int result = simpleArraySum(ar_count, ar);
+    char** b_temp = split_string(rtrim(readline()));
 
-    fprintf(fptr, "%d\n", result);
+    int* b = malloc(3 * sizeof(int));
+
+    for (int i = 0; i < 3; i++) {
+        int b_item = parse_int(*(b_temp + i));
+
+        *(b + i) = b_item;
+    }
+
+    int result_count;
+    int* result = compareTriplets(3, a, 3, b, &result_count);
+
+    for (int i = 0; i < result_count; i++) {
+        fprintf(fptr, "%d", *(result + i));
+
+        if (i != result_count - 1) {
+            fprintf(fptr, " ");
+        }
+    }
+
+    fprintf(fptr, "\n");
 
     fclose(fptr);
 
