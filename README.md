@@ -6,3 +6,4 @@ A Very Big Sum -       https://www.hackerrank.com/challenges/a-very-big-sum/prob
 Diagonal Difference - https://www.hackerrank.com/challenges/diagonal-difference/problem?isFullScreen=true
 Plus Minus          - https://www.hackerrank.com/challenges/plus-minus/problem?isFullScreen=true
 Staircase           - https://www.hackerrank.com/challenges/staircase/problem?isFullScreen=true
+Mini-Max Sum -        https://www.hackerrank.com/challenges/mini-max-sum/problem?isFullScreen=true
